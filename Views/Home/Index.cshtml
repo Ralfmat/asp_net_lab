@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    string[] arr = { "Audi", "Ford", "BMW" };
+}
+
+<div class="text-center">
+    @foreach (var item in arr)
+    {
+        if (@item == "Audi")
+        {
+            <p style="color: red;">@item</p>
+        }
+        else
+        {
+            <p>@item</p>
+        }
+    }
+</div>
