@@ -1,7 +1,11 @@
+using asp_net_lab.DAL;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<FilmyContext>(options=>options.UseSqlServer(builder.Configuration.GetConnectionString("filmyCS")));
 
 var app = builder.Build();
 
