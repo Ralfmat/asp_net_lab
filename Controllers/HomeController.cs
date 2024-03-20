@@ -1,30 +1,33 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using asp_net_lab.DAL;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace asp_net_lab.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        FilmyContext db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(FilmyContext db)
         {
-            _logger = logger;
+            this.db = db;
         }
 
-        public IActionResult StronyStatyczne() 
-        {
-            return View();
-        }
 
         public IActionResult Index()
         {
-            return View();
+            var kategorie = db.Kategorie.ToList();
+            return View(kategorie);
         }
 
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult StronyStatyczne(string nazwa)
+        {
+            return View(nazwa);
         }
     }
 }
