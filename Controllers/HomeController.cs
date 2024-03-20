@@ -12,6 +12,11 @@ namespace asp_net_lab.Controllers
             _logger = logger;
         }
 
+        public IActionResult StronyStatyczne() 
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             return View();
