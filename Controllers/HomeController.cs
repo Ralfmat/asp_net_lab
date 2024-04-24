@@ -16,7 +16,7 @@ namespace asp_net_lab.Controllers
 
         public IActionResult Index()
         {
-            var kategorie = db.C.ToList();
+            var kategorie = db.Kategorie.ToList();
             return View(kategorie);
         }
 

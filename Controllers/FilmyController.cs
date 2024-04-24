@@ -1,4 +1,5 @@
 ﻿using asp_net_lab.DAL;
+using asp_net_lab.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,9 +19,8 @@ namespace asp_net_lab.Controllers
             return View();
         }
 
-        public IActionResult Lista()
+        public IActionResult Lista(string nazwaKategorii)
         {
-            var nazwaKategorii;
             var kategorie = db.Kategorie.Include("Filmy").Where(k => k.Nazwa.ToUpper() == nazwaKategorii.ToUpper()).Single();
             var filmy = kategorie.Filmy.ToList();
             ViewBag.Title = nazwaKategorii;
@@ -33,6 +33,21 @@ namespace asp_net_lab.Controllers
             var film = db.Filmy.Find(idFilmu);
 
             return View(film);
+        }
+
+        [HttpGet]
+        public IActionResult DodajFilm()
+        {
+            DodawanieFilmow dodaj = new DodawanieFilmow();
+            var kategorie = db.Kategorie.ToList();
+            dodaj.kategorie = kategorie;
+            return View(dodaj);
+        }
+
+        [HttpPost]
+        public IActionResult DodajFilm(DodawanieFilmow obj)
+        {
+
         }
     }
 }
