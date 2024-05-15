@@ -1,0 +1,19 @@
+﻿@model DodawanieFilmow
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Dodaj film";
+}
+
+@using (Html.BeginForm("DodajFilm", "Filmy", FormMethod.Get))
+{
+    <tr>
+        @Html.LabelFor(item => item.film.Rezyser, "Reżyser:")
+        @Html.TextBoxFor(item => item.film.Rezyser, new { @class = "form-control" });
+
+        <td>Tytuł</td>
+        <td>@Html.TextBoxFor(item => item.film.Tytul)</td>
+    </tr>
+    
+   
+}
+

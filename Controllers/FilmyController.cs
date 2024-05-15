@@ -8,6 +8,7 @@ namespace asp_net_lab.Controllers
     public class FilmyController : Controller
     {
         FilmyContext db;
+        IWebHostEnvironment hostEnvironment;
 
         public FilmyController(FilmyContext db)
         {
@@ -47,7 +48,15 @@ namespace asp_net_lab.Controllers
         [HttpPost]
         public IActionResult DodajFilm(DodawanieFilmow obj)
         {
-
+            obj.film.DataDodania = DateTime.Now;
+            var sciezkaPlakatu = Path.Combine(hostEnvironment.WebRootPath, "content");
+            var nazwaPlakatu = Guid.NewGuid() + "_" + obj.plakat.FileName;
+            var sciezkaDoPlakatu = Path.Combine(sciezkaPlakatu, nazwaPlakatu);
+            obj.plakat.CopyTo(new FileStream(sciezkaDoPlakatu, FileMode.Create));
+            obj.film.Plakat = nazwaPlakatu;
+            db.Filmy.Add(obj.film);
+            db.SaveChanges();
+            return RedirectToAction("Szczegoly", new { idFilmu = obj.film.Id });
         }
     }
 }

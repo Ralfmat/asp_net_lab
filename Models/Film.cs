@@ -1,5 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 
 namespace asp_net_lab.Models
 {
@@ -17,6 +20,8 @@ namespace asp_net_lab.Models
         public float Cena { get; set; }
         [Required(ErrorMessage = "Podaj date dodania")]
         public DateTime DataDodania { get; set; }
+        [AllowNull]
+        public string Plakat { get; set; }
 
         [ForeignKey("Kategoria")]
         public int KategoriaId { get; set; }
